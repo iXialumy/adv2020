@@ -1,4 +1,4 @@
-module Main where
+module Adv01 where
 
 import Data.List
 
@@ -6,19 +6,21 @@ input = "1593\n1575\n1583\n1609\n1835\n2008\n1638\n1396\n1833\n1524\n1778\n1574\
 
 combinations 0 lst = [[]]
 combinations n lst = do
-    (x:xs) <- tails lst
-    rest   <- combinations (n-1) xs
-    return $ x : rest
+  (x : xs) <- tails lst
+  rest <- combinations (n -1) xs
+  return $ x : rest
 
 sumIs2020 :: [Int] -> Bool
-sumIs2020 l = sum l == 2020
+sumIs2020 = (2020 ==) . sum
 
 readInt :: String -> Int
 readInt = read
 
 task n = print $ product $ head $ filter sumIs2020 $ combinations n $ map readInt $ lines input
 
+adv01 = do
+  task 2
+  task 3
+
 main :: IO ()
-main = do
-    task 2
-    task 3
+main = adv01
